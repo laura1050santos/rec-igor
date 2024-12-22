@@ -6,7 +6,7 @@ userController= Blueprint('user',__name__)
 
 
 
-@userController.route('/add', methods= ["GET","POST"])
+@userController.route('/', methods= ["GET","POST"])
 def add():
     if request.method == "POST":
         destino = request.form.get("destino")
@@ -57,25 +57,19 @@ def delete_cookie():
     resp.set_cookie('viagens', '', expires=0)
     return resp
 
-rotaPriv=['user.lista', 'user.editar']
+rotaPriv=['user.lista']
+all_rotas=['user.lista', 'user.add', 'user.delete_cookie','user.get_cookie','user.set_cookie','user.excluir']
 
-@userController.route('/verificar_cookie')
-def verificar_cookie():
-    cookie = request.cookies.get('viagens')
-    if cookie:
-        return f"Cookie encontrado: {cookie}"
-    else:
-        return "Nenhum cookie encontrado."
 
 @userController.before_request
 def autenticar_rotas():
     viagens=session.get('viagem')
     if not viagens and request.endpoint in rotaPriv:
         return redirect(url_for('user.add'))
+    if request.endpoint not in all_rotas:
+        abort(404)
     
-@userController.route("/editar")
-def editar():
-    pass
+    
 @userController.errorhandler(404)
 def pageNotFound(e):
     return render_template("404.html"), 404

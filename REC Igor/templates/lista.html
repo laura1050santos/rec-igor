@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>suas viagens</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+  <h1>Lista de viagens</h1> 
+  Viagens Registradas:{{ nViagens }} 
+  <table border="1">
+    <thead>
+    <tr>
+        <th>destino</th>
+        <th>data </th>
+        <th> descrição</th>
+        <th>avaliaçao</th>
+    </tr>
+</thead>
+<tbody>
+    {% if viagens %}
+    {% for viagem in viagens %}
+    <tr>
+        <td>{{ viagem.destino }}</td>
+        <td>{{ viagem.data }}</td>
+        <td>{{ viagem.desc }}</td>
+        <td>{{ viagem.avaliacao }}</td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+</tbody>
+</table>
+<form  action="/excluir-lista">
+<button class="button" type="submit" > excluir lista</button>
+</form>
+</body>
+</html>

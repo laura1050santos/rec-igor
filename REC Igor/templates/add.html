@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina inicial</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+    <nav>
+      
+    </nav>
+
+</header>
+
+<div class="content">
+    <h2>Bem vindo ao seu diario de viagens!</h2>
+<br>
+    <form id="cadastro" method="post" action="{{ url_for('user.add') }}">
+    <label for="destino">Destino </label>
+    <input type="text" id="destino" name="destino" placeholder="Destino" >    
+    <label for="data"> Data</label>
+    <input type="date" id="data" name="data" placeholder="Data" >
+    <label for="desc">Descrição</label>
+    <input type="text" id="desc" name="desc" placeholder="Descrição" >
+    <label for="av">avaliação</label>
+    <input type="number" id="av" name="av" placeholder="Avaliação" >
+        <button type="submit">adicionar viagem</button>
+        <button> <a href="{{ url_for('user.lista') }}">viagem</a> </button>
+
+
+    </form>
+
+</div>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="flashes">
+      {% for category, message in messages %}        
+        <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+</body>
+</html>

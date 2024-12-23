@@ -3,68 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>suas viagens</title>
+    <title>Suas viagens</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
 </head>
 <body>
   <h1>Lista de viagens</h1> 
-  Viagens Registradas:{{ nViagens }} 
-  {% if viagemRealizada  %}
+  Viagens Registradas: {{ nViagens }} 
 
+  {% if viagemRealizada %}
+        <h2>Viagens Realizadas</h2>
         <table border="1">
             <thead>
-            <tr>
-                <th>destino</th>
-                <th>data </th>
-                <th> descrição</th>
-                <th>avaliaçao</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            
-            {% for viagem in viagemRealizada %}
-            <tr>
-                <td>{{ viagem.destino }}</td>
-                <td>{{ viagem.data }}</td>
-                <td>{{ viagem.desc }}</td>
-                <td>{{ viagem.avaliacao }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
+                <tr>
+                    <th>Destino</th>
+                    <th>Data</th>
+                    <th>Descrição</th>
+                    <th>Avaliação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for viagem in viagemRealizada %}
+                <tr>
+                    <td>{{ viagem.destino }}</td>
+                    <td>{{ viagem.data }}</td>
+                    <td>{{ viagem.desc }}</td>
+                    <td>{{ viagem.avaliacao }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
-{% endif %}
+  {% else %}
+      <p>Não há viagens realizadas.</p>
+  {% endif %}
 
-<br><br>
-<table border="1">
-    <thead>
-    <tr>
-        <th>destino</th>
-        <th>data </th>
-        <th> descrição</th>
-        <th>avaliaçao</th>
+  <br><br>
 
-    </tr>
-</thead>
-<tbody>
-    {% if viagemNaoRealizada  %}
-    {% for viagem in viagemNaoRealizada %}
-    <tr>
-        <td>{{ viagem.destino }}</td>
-        <td>{{ viagem.data }}</td>
-        <td>{{ viagem.desc }}</td>
-        <td>{{ viagem.avaliacao }}</td>
-    </tr>
-    {% endfor %}
-    {% endif %}
-</tbody>
-</table>
-<br>
-<form  action="/excluir-lista">
-<button class="button" type="submit" > excluir lista</button>
-<button> <a href="{{ url_for('user.add') }}">adcionar viagem</a> </button>
+  <h2>Viagens Não Realizadas</h2>
+  {% if viagemNaoRealizada %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Destino</th>
+                    <th>Data</th>
+                    <th>Descrição</th>
+                    <th>Avaliação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for viagem in viagemNaoRealizada %}
+                <tr>
+                    <td>{{ viagem.destino }}</td>
+                    <td>{{ viagem.data }}</td>
+                    <td>{{ viagem.desc }}</td>
+                    <td>{{ viagem.avaliacao }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+  {% else %}
+      <p>Não há viagens não realizadas.</p>
+  {% endif %}
 
-</form>
+  <br>
+  <form action="/excluir-lista">
+    <button class="button" type="submit">Excluir lista</button>
+    <button><a href="{{ url_for('user.add') }}">Adicionar viagem</a></button>
+  </form>
+
 </body>
 </html>

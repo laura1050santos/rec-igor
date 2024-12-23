@@ -1,72 +1,113 @@
-.content{
-    text-align: cente;
-    align-items: center;
-    display: inline-flexbox;
-    background-color:#5c648a;
-    color: #d9dbed;
-    border-radius: 5% ;
-    height: 550px;
-    width: 700px;
-    margin: auto;
-    padding: 30px 30px 30px 60px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    
+/* Estilos Gerais */
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
 
-input{
+h1 {
+    text-align: center;
+    color: #5c648a;
+}
+
+.content {
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #5c648a;
+    color: #d9dbed;
+    border-radius: 5%;
+    height: auto;
+    width: 700px;
+    margin: 30px auto;
+    padding: 30px;
+}
+
+input,
+select {
     width: 90%;
     padding: 12px;
-    margin: 20px;
-
+    margin: 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
 }
-.flashes{
+
+select {
+    background-color: #fff;
+    /* Cor de fundo do select */
+    -webkit-appearance: none;
+    /* Remover estilo padrão do navegador */
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.flashes {
     align-items: center;
     width: auto;
     height: 30px;
     border-radius: 5px;
     border: 2px;
     text-align: center;
-    
 }
 
 .flashes .error {
     color: red;
-    border: 1px;
-    border: red;
+    border: 1px solid red;
 }
 
 .flashes .success {
     color: green;
-    border: 1px;
-    border: green;
+    border: 1px solid green;
 }
 
-button{
+button {
     align-items: center;
     width: 200px;
     height: 30px;
     border-radius: 5px;
-    border: 2px;
+    border: 2px solid #d9dbed;
     background-color: #d9dbed;
-    
-
+    color: #5c648a;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    margin: 10px 5px;
+    cursor: pointer;
 }
+
 table {
     border-collapse: collapse;
-    width: 100%;
+    width: 90%;
+    margin: 30px auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-th, td {
+
+th,
+td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
+
 th {
     background-color: #f2f2f2;
+    color: #5c648a;
 }
+
 tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-ul{
+ul {
     list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
 }

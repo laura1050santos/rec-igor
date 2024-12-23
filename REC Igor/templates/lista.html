@@ -10,18 +10,46 @@
 <body>
   <h1>Lista de viagens</h1> 
   Viagens Registradas:{{ nViagens }} 
-  <table border="1">
+  {% if viagemRealizada  %}
+
+        <table border="1">
+            <thead>
+            <tr>
+                <th>destino</th>
+                <th>data </th>
+                <th> descrição</th>
+                <th>avaliaçao</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for viagem in viagemRealizada %}
+            <tr>
+                <td>{{ viagem.destino }}</td>
+                <td>{{ viagem.data }}</td>
+                <td>{{ viagem.desc }}</td>
+                <td>{{ viagem.avaliacao }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+{% endif %}
+
+<br><br>
+<table border="1">
     <thead>
     <tr>
         <th>destino</th>
         <th>data </th>
         <th> descrição</th>
         <th>avaliaçao</th>
+
     </tr>
 </thead>
 <tbody>
-    {% if viagens %}
-    {% for viagem in viagens %}
+    {% if viagemNaoRealizada  %}
+    {% for viagem in viagemNaoRealizada %}
     <tr>
         <td>{{ viagem.destino }}</td>
         <td>{{ viagem.data }}</td>
@@ -32,6 +60,7 @@
     {% endif %}
 </tbody>
 </table>
+<br>
 <form  action="/excluir-lista">
 <button class="button" type="submit" > excluir lista</button>
 <button> <a href="{{ url_for('user.add') }}">adcionar viagem</a> </button>

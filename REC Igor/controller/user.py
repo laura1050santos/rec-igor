@@ -14,12 +14,20 @@ def add():
         desc = request.form.get("desc")
         avaliacao = request.form.get("av")
         if destino and data and desc and avaliacao:
-            viagem=Viagem(destino,data, desc, avaliacao)
-            lista_viagem.append(viagem.__dict__)
-            session['viagem']= lista_viagem
-            flash('Viagem adicionada com sucesso','success')
-            return redirect(url_for("user.set_cookie"))
-
+            try:
+                av = int(avaliacao)  # Tenta converter o valor para inteiro
+                if av < 1 or av > 5:
+                    flash('Avaliação deve ser entre 1 e 5', 'error')
+                    return redirect(url_for('user.add'))
+                viagem = Viagem(destino, data, desc, avaliacao)
+                lista_viagem.append(viagem.__dict__)
+                session['viagem'] = lista_viagem
+                flash('Viagem adicionada com sucesso', 'success')
+                return redirect(url_for("user.set_cookie"))
+            except type(av) != int:
+                print("A string não pode ser convertida para um inteiro.")
+                flash('digite apenas numeros na avaliação','error')
+                abort(500)
         else:
             flash('preencha todos os campos para adicionar a viagem', 'error')
 
@@ -58,7 +66,6 @@ def delete_cookie():
     return resp
 
 rotaPriv=['user.lista']
-all_rotas=['user.lista', 'user.add', 'user.delete_cookie','user.get_cookie','user.set_cookie','user.excluir']
 
 
 @userController.before_request
@@ -66,14 +73,12 @@ def autenticar_rotas():
     viagens=session.get('viagem')
     if not viagens and request.endpoint in rotaPriv:
         return redirect(url_for('user.add'))
-    if request.endpoint not in all_rotas:
-        abort(404)
-    
+
     
 @userController.errorhandler(404)
-def pageNotFound(e):
+def pageNotFound(error):
     return render_template("404.html"), 404
 
 @userController.errorhandler(500)
-def ErroInterno(e):
+def ErroInterno(error):
     return render_template("500.html"), 500
